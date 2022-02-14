@@ -6,7 +6,15 @@ public abstract class Account {
 	
 	@Override
 	public boolean equals(Object obj) {
-		return true; 
+		Account compareAccount = (Account)obj;
+		if(this.holder.compareTo(compareAccount.holder) == 0) {
+			if(this.closed == compareAccount.closed) {
+				if(this.balance == compareAccount.balance) {
+					return true;
+				}
+			}
+		}
+		return false; 
 		
 	}
 	
@@ -15,11 +23,18 @@ public abstract class Account {
 	public String toString() { 
 		return "";
 	}
-	public void withdraw(double amount) { 
+	public void withdraw(double amount) {
+		if(amount < 0 || amount > this.balance) {
+			return;
+		}
+		this.balance-= amount;
 		
 	}
 	public void deposit(double amount) { 
-		
+		if(amount < 0) {
+			return;
+		}
+		this.balance+= amount;
 	}
 	public abstract double monthlyInterest(); //return the monthly interest
 	public abstract double fee(); //return the monthly fee
