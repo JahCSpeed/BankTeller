@@ -28,7 +28,7 @@ public class BankTeller {
 	}
 	
 	/**
-	 Ends the BankTeller and stops taking in commands
+	 Ends the BankTeller and stops taking in commands.
 	 */
 	private void endBankTeller() {
 		System.out.println("Bank Teller is terminated.");
@@ -36,11 +36,12 @@ public class BankTeller {
 	}
 	
 	/**
-	 
+	 Performs a command that requires additional params to execute.
+	 Deals with Opening, Closing, Depositing, and Withdrawing from accounts.
 	 @param command
-	 @return
+	        (more params)
 	 */
-	private int doNameCommand(int command) {
+	private void doNameCommand(int command) {
 		switch(command) {
 			case 1:
 				//O command
@@ -51,20 +52,27 @@ public class BankTeller {
 			case 4:
 				//W command
 			default:
-				return -1;
+				break;
 		}
 	}
 	
+	/**
+	 Performs a command, primarily printing commands, updating commands, or the stop command.
+	 None of these commands require further params.
+	 @param command The command typed in that wants to be executed.
+	 @return 0 if the command has been done successfully or if invalid, -1 otherwise.
+	 */
 	private int doNoNameCommand(int command) {
 		switch(command) {
 			case 5:
-				//P command
 				this.mainDatabase.print();
 				return 0;
 			case 6:
-				//PT command
+				this.mainDatabase.printByAccountType();
+				return 0;
 			case 7:
-				//PI command
+				this.mainDatabase.printFeeAndInterest();
+				return 0;
 			case 8:
 				//UB command
 			case 9:
@@ -81,7 +89,7 @@ public class BankTeller {
 	/**
 	 Gets the id of the command from the string command.
 	 @param input The command string inputted into the system
-	 @return The proper id of the command,
+	 @return The proper id of the command, -1 otherwise.
 	 */
 	private int getCommand(String input) {
 		switch(input) {
