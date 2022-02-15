@@ -25,6 +25,7 @@ public abstract class Account {
 	public String toString() { 
 		return "";
 	}
+	
 	public void withdraw(double amount) {
 		if(amount < 0 || amount > this.balance) {
 			return;
@@ -32,6 +33,7 @@ public abstract class Account {
 		this.balance-= amount;
 		
 	}
+	
 	public void deposit(double amount) { 
 		if(amount < 0) {
 			return;
