@@ -36,6 +36,10 @@ public abstract class Account {
 		}
 		this.balance+= amount;
 	}
+	
+	public double getBalance() {
+		return this.balance;
+	}
 	public abstract double monthlyInterest(); //return the monthly interest
 	public abstract double fee(); //return the monthly fee
 	public abstract String getType(); //return the account type (class name)

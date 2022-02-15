@@ -1,6 +1,11 @@
 package accountType;
 
 public class CollageChecking extends Checking{
+	private int campusCode;
+	
+	public void CollageCehcking(int campusCode){
+		this.campusCode = campusCode;
+	}
 	@Override
 	public double fee() {
 		return 0;
@@ -12,5 +17,9 @@ public class CollageChecking extends Checking{
 	@Override
 	public String getType() {
 		return "Collage Checking";
+	}
+	
+	public int getCampusCode() {
+		return this.campusCode;
 	}
 }
