@@ -3,7 +3,12 @@ package bankTeller;
 import java.util.Scanner;
 
 import accounts.AccountDatabase;
+import accounts.Profile;
 
+/**
+ 
+ @author Jah C Speed, Abe Vitangcol
+ */
 public class BankTeller {
 	private boolean isRunning;
 	private Scanner scanInput;
@@ -22,11 +27,19 @@ public class BankTeller {
 		//Runs the Bank Teller
 	}
 	
+	/**
+	 Ends the BankTeller and stops taking in commands
+	 */
 	private void endBankTeller() {
 		System.out.println("Bank Teller is terminated.");
 		this.isRunning = !this.isRunning;
 	}
 	
+	/**
+	 
+	 @param command
+	 @return
+	 */
 	private int doNameCommand(int command) {
 		switch(command) {
 			case 1:
@@ -46,6 +59,8 @@ public class BankTeller {
 		switch(command) {
 			case 5:
 				//P command
+				this.mainDatabase.print();
+				return 0;
 			case 6:
 				//PT command
 			case 7:
@@ -53,20 +68,61 @@ public class BankTeller {
 			case 8:
 				//UB command
 			case 9:
-				//Q command
+				this.endBankTeller();
+				return 0;
+			case -1:
+				System.out.println("Invalid command!");
+				return 0;
 			default:
 				return -1;
 		}
 	}
 	
 	/**
-	 Checks if the person already has an account in
+	 Gets the id of the command from the string command.
+	 @param input The command string inputted into the system
+	 @return The proper id of the command,
+	 */
+	private int getCommand(String input) {
+		switch(input) {
+			case("O"):
+				return Commands.O.id;
+			case("C"):
+				return Commands.C.id;
+			case("D"):
+				return Commands.D.id;
+			case("W"):
+				return Commands.W.id;
+			case("P"):
+				return Commands.P.id;
+			case("PT"):
+				return Commands.PT.id;
+			case("PI"):
+				return Commands.PI.id;
+			case("UB"):
+				return Commands.UB.id;
+			case("Q"):
+				return Commands.Q.id;
+			default:
+				break;
+		}
+		return -1;
+	}
+	
+	/**
+	 Checks if the person already has an account in the system.
 	 @param person
 	 @return
 	 */
 	private boolean checkProfile(Profile person) {
 		
 	}
+	
+	//private Profile createProfile(String fname, String lname, Date dob) {
+		
+	//}
+	
+	private 
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
