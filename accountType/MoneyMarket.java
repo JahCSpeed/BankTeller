@@ -1,10 +1,12 @@
 package accountType;
 
+import accounts.Profile;
+
 public class MoneyMarket extends Savings {
 	private int withdrawCounter;
 	
-	public MoneyMarket() {
-		super(true);
+	public MoneyMarket(Profile holder, boolean closed, double balance) {
+		super(holder, true, balance, true);
 	}
 	@Override
 	public double monthlyInterest() {

@@ -1,12 +1,16 @@
 package accountType;
 
 import accounts.Account;
+import accounts.Profile;
 
 public class Savings extends Account {
 	
 	private boolean loyalCustomer;
 	
-	public Savings(boolean loyalCustomer) {
+	public Savings(Profile holder, boolean closed, double balance,boolean loyalCustomer) {
+		this.holder = holder;
+		this.closed = closed;
+		this.balance = balance;
 		this.loyalCustomer = loyalCustomer;
 	}
 	@Override
