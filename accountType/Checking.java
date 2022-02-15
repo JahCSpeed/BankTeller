@@ -25,5 +25,9 @@ public class Checking extends Account{
 	public String getType() {
 		return "Checking";
 	}
+	
+	public String toString() {
+		return super.toString();
+	}
 
 }

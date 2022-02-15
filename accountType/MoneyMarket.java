@@ -24,7 +24,7 @@ public class MoneyMarket extends Savings {
 
 	@Override
 	public String getType() {
-		return "Monkey Market";
+		return "Monkey Market " + super.getType();
 	}
 	
 	@Override
@@ -40,6 +40,10 @@ public class MoneyMarket extends Savings {
 		if(this.getBalance()< 2500) {
 			this.setLoyalCustomer(false);
 		}
+	}
+	
+	public String toString() {
+		return super.toString() + "::withdrawl: " + this.withdrawCounter;
 	}
 
 }
