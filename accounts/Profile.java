@@ -28,4 +28,8 @@ public class Profile {
 		}
 		return -1;
 	}
+	
+	public String toString() {
+		return fname + " " + lname + ", DOB: " + dob.toString();
+	}
 }

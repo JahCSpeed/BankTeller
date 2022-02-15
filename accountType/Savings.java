@@ -38,5 +38,8 @@ public class Savings extends Account {
 	public void setLoyalCustomer(boolean value) {
 		this.loyalCustomer = value;
 	}
+	public String toString() {
+		return super.toString() + (this.isLoyalCustomer()? "::Loyal":"");
+	}
 
 }
