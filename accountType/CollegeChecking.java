@@ -1,15 +1,14 @@
 package accountType;
 
-<<<<<<< HEAD:accountType/CollegeChecking.java
+
 public class CollegeChecking extends Checking{
-=======
-public class CollageChecking extends Checking{
+
 	private int campusCode;
 	
-	public void CollageCehcking(int campusCode){
+	public void CollegeChecking(int campusCode){
 		this.campusCode = campusCode;
 	}
->>>>>>> ec3ea4db2c5d8e36aed607a13e7c2000f0cc9d76:accountType/CollageChecking.java
+
 	@Override
 	public double fee() {
 		return 0;
@@ -18,11 +17,18 @@ public class CollageChecking extends Checking{
 		return 0.0025;
 	}
 	
+	/**
+	 Gets the type of this checking account and returns it as a string.
+	 */
 	@Override
 	public String getType() {
 		return "Collage Checking";
 	}
 	
+	/**
+	 Gets the campus code of this particular college checking.
+	 Necessary to open a college checking
+	 */
 	public int getCampusCode() {
 		return this.campusCode;
 	}
