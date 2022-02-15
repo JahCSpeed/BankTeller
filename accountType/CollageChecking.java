@@ -1,11 +1,17 @@
 package accountType;
 
+import accounts.Profile;
+
 public class CollageChecking extends Checking{
 	private int campusCode;
 	
-	public void CollageCehcking(int campusCode){
+	
+	public CollageChecking(Profile holder, boolean closed, double balance, int campusCode) {
+		super(holder, closed, balance);
 		this.campusCode = campusCode;
 	}
+
+	
 	@Override
 	public double fee() {
 		return 0;

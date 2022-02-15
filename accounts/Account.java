@@ -10,7 +10,9 @@ public abstract class Account {
 		if(this.holder.compareTo(compareAccount.holder) == 0) {
 			if(this.closed == compareAccount.closed) {
 				if(this.balance == compareAccount.balance) {
-					return true;
+					if(this.getType().equals(((Account)obj).getType())) {
+						return true;
+					}
 				}
 			}
 		}

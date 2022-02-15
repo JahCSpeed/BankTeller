@@ -1,8 +1,14 @@
 package accountType;
 
 import accounts.Account;
+import accounts.Profile;
 
 public class Checking extends Account{
+	public Checking(Profile holder, boolean closed, double balance) {
+		this.holder = holder;
+		this.closed = closed;
+		this.balance = balance;
+	}
 
 	public double monthlyInterest() {
 		return 0.001;
