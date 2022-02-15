@@ -1,6 +1,6 @@
 package accountType;
 
-public class CollageChecking extends Checking{
+public class CollegeChecking extends Checking{
 	@Override
 	public double fee() {
 		return 0;
