@@ -4,6 +4,11 @@ public abstract class Account {
 	protected boolean closed;
 	protected double balance;
 	
+	/**
+	 Checks if this account is the same as another account.
+	 @param obj The object of interest to check if this account is the same as it.
+	 @return true if the two are the same, false otherwise.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		Account compareAccount = (Account)obj;
@@ -20,7 +25,11 @@ public abstract class Account {
 		
 	}
 	
-	
+	/**
+	 Turns this account into a readable string.
+	 Format: "Type :: Holder :: $Balance"
+	 @return This account tyoe in a readable string format.
+	 */
 	@Override
 	public String toString() { 
 		return getType() + "::" + holder.toString() + "::Balance $" + getBalance();
@@ -41,6 +50,10 @@ public abstract class Account {
 		this.balance+= amount;
 	}
 	
+	/**
+	 Gets the Balance of this account.
+	 @return The balance of this account in a double format.
+	 */
 	public double getBalance() {
 		return this.balance;
 	}

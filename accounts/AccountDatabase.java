@@ -44,6 +44,11 @@ public class AccountDatabase {
 		return true;
 	}
 	
+	/**
+	 Closes a specific account, making it unable to be used.
+	 @param account The specific account to be closed.
+	 @return True if this action was successful.
+	 */
 	public boolean close(Account account) {
 		int index = this.find(account);
 		this.accounts[index].closed = true;
@@ -66,6 +71,9 @@ public class AccountDatabase {
 		return true;
 	} 
 	
+	/**
+	 Prints the accounts in the database in the current order.
+	 */
 	public void print() {
 		if(this.numAcct == 0) {
 			System.out.println("Account Database is empty!");
@@ -79,6 +87,9 @@ public class AccountDatabase {
 		System.out.println("*end of list*" + "\n");
 	}
 	
+	/**
+	 Prints the accounts in this database sorted by their account type.
+	 */
 	public void printByAccountType() {
 		if(this.numAcct == 0) {
 			System.out.println("Account Database is empty!");
