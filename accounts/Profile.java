@@ -6,6 +6,11 @@ public class Profile {
 	private String lname;
 	private Date dob;
 	
+	public Profile(String fname, String lname, Date dob) {
+		this.fname = fname;
+		this.lname = lname;
+		this.dob = dob;
+	}
 	public String getfName() {
 		return this.fname;
 	}
@@ -19,9 +24,9 @@ public class Profile {
 	}
 	
 	public int compareTo(Profile person2) {
-		if(this.fname.equals(person2.getfName())) {
-			if(this.lname.equals(person2.getlName())) {
-				if(this.dob.compareTo(dob) == 0) {
+		if(this.fname.toLowerCase().equals(person2.getfName().toLowerCase())) {
+			if(this.lname.toLowerCase().equals(person2.getlName().toLowerCase())) {
+				if(this.dob.compareTo(person2.getDOB()) == 0) {
 					return 0;
 				}
 			}
@@ -30,6 +35,6 @@ public class Profile {
 	}
 	
 	public String toString() {
-		return fname + " " + lname + ", DOB: " + dob.toString();
+		return fname + " " + lname + " " + dob.toString();
 	}
 }

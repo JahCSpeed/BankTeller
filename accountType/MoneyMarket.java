@@ -5,9 +5,10 @@ import accounts.Profile;
 public class MoneyMarket extends Savings {
 	private int withdrawCounter;
 	
-	public MoneyMarket(Profile holder, boolean closed, double balance) {
-		super(holder, true, balance, true);
+	public MoneyMarket(Profile holder,double balance) {
+		super(holder,balance, true);
 	}
+	
 	@Override
 	public double monthlyInterest() {
 		return (this.isLoyalCustomer()?0.0095:0.008);
@@ -24,16 +25,13 @@ public class MoneyMarket extends Savings {
 
 	@Override
 	public String getType() {
-		return "Monkey Market " + super.getType();
+		return "Money Market";
 	}
 	
 	@Override
 	public void withdraw(double amount) {
-		if(amount < 0 || amount > this.balance) {
-			this.withdrawCounter++;
-		}
 		super.withdraw(amount);
-		
+		this.withdrawCounter++;
 	}
 	
 	public void checkLoyalty() {

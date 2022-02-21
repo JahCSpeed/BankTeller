@@ -5,10 +5,11 @@ import accounts.Profile;
 public class CollegeChecking extends Checking{
 	private int campusCode;
 	
-	public CollegeChecking(Profile holder, boolean closed, double balance, int campusCode) {
-		super(holder, closed, balance);
+	public CollegeChecking(Profile holder,double balance, int campusCode) {
+		super(holder, balance);
 		this.campusCode = campusCode;
 	}
+	
 
 	@Override
 	public double fee() {
@@ -23,7 +24,7 @@ public class CollegeChecking extends Checking{
 	 */
 	@Override
 	public String getType() {
-		return "Collage Checking";
+		return "College Checking";
 	}
 	
 	/**
@@ -32,5 +33,22 @@ public class CollegeChecking extends Checking{
 	 */
 	public int getCampusCode() {
 		return this.campusCode;
+	}
+	@Override
+	public String toString() {
+		return super.toString() + this.getLocation();
+	}
+	
+	private String getLocation() {
+		switch(this.campusCode) {
+			case 0:
+				return "::NEW_BRUNSWICK";
+			case 1:
+				return "::NEWARK";
+			case 2:
+				return "::CAMDEN";
+			default:
+				return "";
+		}
 	}
 }

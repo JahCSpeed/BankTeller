@@ -1,4 +1,10 @@
 package accounts;
+
+import java.text.DecimalFormat;
+
+import accountType.Checking;
+import accountType.CollegeChecking;
+
 public abstract class Account {
 	protected Profile holder;
 	protected boolean closed;
@@ -13,13 +19,10 @@ public abstract class Account {
 	public boolean equals(Object obj) {
 		Account compareAccount = (Account)obj;
 		if(this.holder.compareTo(compareAccount.holder) == 0) {
-			if(this.closed == compareAccount.closed) {
-				if(this.balance == compareAccount.balance) {
-					if(this.getType().equals(((Account)obj).getType())) {
-						return true;
-					}
-				}
+			if(this.getType().equals(((Account)obj).getType())) {
+				return true;
 			}
+			
 		}
 		return false; 
 		
@@ -32,7 +35,8 @@ public abstract class Account {
 	 */
 	@Override
 	public String toString() { 
-		return getType() + "::" + holder.toString() + "::Balance $" + getBalance();
+		DecimalFormat numberFormat = new DecimalFormat("#,##0.00");
+		return getType() + "::" + holder.toString() + "::Balance $" + numberFormat.format(getBalance()) + (!this.closed? "":"::CLOSED");
 	}
 	
 	public void withdraw(double amount) {
@@ -57,6 +61,18 @@ public abstract class Account {
 	public double getBalance() {
 		return this.balance;
 	}
+	/**
+	 Gets the Holder of this account.
+	 @return The holder of this account in a Profile format.
+	 */
+	public Profile getHolder() {
+		return this.holder;
+	}
+	
+	public boolean isClosed() {
+		return this.closed;
+	}
+	
 	public abstract double monthlyInterest(); //return the monthly interest
 	public abstract double fee(); //return the monthly fee
 	public abstract String getType(); //return the account type (class name)

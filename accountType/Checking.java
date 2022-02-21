@@ -4,9 +4,9 @@ import accounts.Account;
 import accounts.Profile;
 
 public class Checking extends Account{
-	public Checking(Profile holder, boolean closed, double balance) {
+	public Checking(Profile holder,double balance) {
 		this.holder = holder;
-		this.closed = closed;
+		this.closed = false;
 		this.balance = balance;
 	}
 

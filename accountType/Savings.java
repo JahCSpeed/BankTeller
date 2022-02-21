@@ -7,12 +7,13 @@ public class Savings extends Account {
 	
 	private boolean loyalCustomer;
 	
-	public Savings(Profile holder, boolean closed, double balance,boolean loyalCustomer) {
+	public Savings(Profile holder,double balance,boolean loyalCustomer) {
 		this.holder = holder;
-		this.closed = closed;
+		this.closed = false;
 		this.balance = balance;
 		this.loyalCustomer = loyalCustomer;
 	}
+	
 	@Override
 	public double monthlyInterest() {
 		return (this.loyalCustomer?0.0045:0.003);
@@ -41,5 +42,6 @@ public class Savings extends Account {
 	public String toString() {
 		return super.toString() + (this.isLoyalCustomer()? "::Loyal":"");
 	}
+	
 
 }

@@ -1,5 +1,9 @@
 package accounts;
 
+import accountType.Checking;
+import accountType.CollegeChecking;
+import accountType.MoneyMarket;
+import accountType.Savings;
 
 public class AccountDatabase {
 	private Account [] accounts;
@@ -7,6 +11,10 @@ public class AccountDatabase {
 	private final int INCREASESIZE = 4;
 	
 	
+	public AccountDatabase() {
+		this.numAcct = 0;
+		this.accounts = new Account[numAcct];
+	}
 	/**
 	 Finds a specific account in this array of accounts and returns the index.
 	 @param account The specific account to be found.
@@ -19,7 +27,37 @@ public class AccountDatabase {
 			}
 		}
 		return -1;
-	} 
+	}
+	public Account getAccount(Account account) { //return the index, or NOT_FOUND
+		for(int i = 0; i < this.numAcct; i++) {
+			//System.out.println("Person 1: " + this.accounts[i].toString() + " \tPerson 2: " + account.toString());
+			if(this.accounts[i].equals(account)) {
+				return this.accounts[i];
+			}
+			
+		}
+		return null;
+	}
+	
+	public int checkDupChecking(Account account) {
+		for(int i = 0; i < this.numAcct; i++) {
+			if(this.accounts[i].equals(account)) {
+				return i;
+			}
+			if(this.accounts[i].getHolder().compareTo(account.getHolder()) == 0) {
+				if(this.accounts[i] instanceof Checking && account instanceof CollegeChecking) {
+					return i;
+				}
+				if(this.accounts[i] instanceof CollegeChecking && account instanceof Checking) {
+					return i;
+				}
+				
+			}
+			
+			
+		}
+		return -1;
+	}
 	/**
 	 Grows the capacity of the accounts array by 4.
 	 Helpful especially when the old array is out of space.
@@ -40,6 +78,9 @@ public class AccountDatabase {
 		if(this.numAcct == this.accounts.length) {
 			this.grow();
 		}
+		if(account == null) {
+			return false;
+		}
 		this.accounts[this.numAcct++] = account;
 		return true;
 	}
@@ -51,23 +92,57 @@ public class AccountDatabase {
 	 */
 	public boolean close(Account account) {
 		int index = this.find(account);
-		this.accounts[index].closed = true;
+		if(index == -1) {
+			return false;
+		}
+		if(this.accounts[index].closed) {
+			return false;
+		}
+		if(this.accounts[index] instanceof Savings || this.accounts[index] instanceof MoneyMarket) {
+			((Savings)this.accounts[index]).setLoyalCustomer(false);
+		}
+		this.accounts[index].balance = 0;
+		return (this.accounts[index].closed = true);
+	}
+	public boolean reopen(Account account, double amount, boolean loyal) {
+		
+		int index = this.find(account);
+		if(index == -1) {
+			return false;
+		}
+		this.accounts[index].closed = false;
+		this.accounts[index].balance = amount;
+		if(account instanceof Savings) {
+			((Savings)this.accounts[index]).setLoyalCustomer(loyal);
+		}
 		return true;
 	}
 	
-	public void deposit(Account account, double amount) { 
+	public void deposit(Account account) { 
 		int index = this.find(account);
-		this.accounts[index].deposit(amount);
+		if(index == -1) {
+			return;
+		}
+		if(this.accounts[index].isClosed()) {
+			return;
+		}
+		this.accounts[index].deposit(account.balance);
 	}
 	
 	//return false if insufficient fund
-	public boolean withdraw(Account account, double amount) {
+	public boolean withdraw(Account account) {
 		int index = this.find(account);
-		Account acct = this.accounts[index];
-		if(amount < 0 || amount > acct.balance) {
+		if(index == -1) {
 			return false;
 		}
-		acct.withdraw(amount);
+		if(this.accounts[index].isClosed()) {
+			return false;
+		}
+		double bal = this.accounts[index].balance;
+		if(bal < account.balance) {
+			return false;
+		}
+		this.accounts[index].withdraw(account.balance);
 		return true;
 	} 
 	
@@ -80,7 +155,7 @@ public class AccountDatabase {
 			return;
 		}
 
-		System.out.println("\n" + "*list of accounts in the database*");
+		System.out.println("\n*list of accounts in the database*");
 		for(int i = 0; i < this.numAcct; i++) {
 			System.out.println(this.accounts[i].toString());
 		}
@@ -91,10 +166,35 @@ public class AccountDatabase {
 	 Prints the accounts in this database sorted by their account type.
 	 */
 	public void printByAccountType() {
+		
 		if(this.numAcct == 0) {
 			System.out.println("Account Database is empty!");
 			return;
 		}
+		System.out.println("\n*list of accounts by account type.");
+		for(int i = 0; i < this.numAcct; i++) {
+			if(this.accounts[i].getType().equals("Checking")) {
+				System.out.println(this.accounts[i].toString());
+			}
+		}
+		for(int i = 0; i < this.numAcct; i++) {
+			if(this.accounts[i].getType().equals("College Checking")) {
+				System.out.println(this.accounts[i].toString());
+			}		
+		}
+		
+		for(int i = 0; i < this.numAcct; i++) {
+			if(this.accounts[i].getType().equals("Money Market Savings")) {
+				System.out.println(this.accounts[i].toString());
+			}
+		}
+		
+		for(int i = 0; i < this.numAcct; i++) {
+			if(this.accounts[i].getType().equals("Savings")) {
+				System.out.println(this.accounts[i].toString());
+			}		
+		}
+		System.out.println("*end of list." + "\n");
 		
 	}
 	
@@ -104,5 +204,12 @@ public class AccountDatabase {
 			return;
 		}
 		
+	}
+	
+	public void doUBCommand() {
+		if(this.numAcct == 0) {
+			System.out.println("Account Database is empty!");
+			return;
+		}
 	}
 }
