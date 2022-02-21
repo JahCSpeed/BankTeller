@@ -174,32 +174,4 @@ public class Date implements Comparable<Date> {
 		return (this.month + 1) + "/" + this.day + "/" + this.year;
 	}
 
-	/**
-	 Testbed main, used for testing this specific class to ensure all functions
-	 and methodologies, mainly isValid, work. 
-	 See test case number before each print statement.
-	 */
-	public static void main(String[] args){
-		boolean not_a_date = new Date("0/00/1000").isValid();
-		System.out.println("Test Case 1: Not a Date \n\tExpected output: False. Result: "
-							+ not_a_date + (not_a_date == false? ". True":". False"));
-		boolean outside_day = new Date("1/5000/2020").isValid();
-		System.out.println("Test Case 2: Day Invalid \n\tExpected output: False. Result: "
-							+ outside_day + (outside_day == false? ". True":". False"));
-		boolean outside_month = new Date("13/02/2022").isValid();
-		System.out.println("Test Case 3: Not a Month \n\tExpected output: False. Result: "
-							+ outside_month + (outside_month == false? ". True":". False"));
-		boolean outside_year = new Date("1/01/10000").isValid();
-		System.out.println("Test Case 4: Year Out-of-Bounds \n\tExpected output: False. Result: "
-							+ outside_year + (outside_year == false? ". True":". False"));
-		boolean bad_February = new Date("2/31/2023").isValid();
-		System.out.println("Test Case 5: February Invalid \n\tExpected output: False. Result: "
-							+ bad_February + (bad_February == false? ". True":". False"));
-		boolean good_Feb = new Date("2/29/2020").isValid();
-		System.out.println("Test Case 6: February Valid \n\tExpected output: True. Result: "
-							+ good_Feb + (good_Feb == true? ". True":". False"));
-		boolean good_date1 = new Date("2/10/2015").isValid();
-		System.out.println("Test Case 7: Valid Date \n\tExpected output: True. Result: "
-							+ good_date1 + (good_date1 == true? ". True":". False"));
-	}
 }
