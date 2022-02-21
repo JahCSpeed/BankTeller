@@ -31,6 +31,7 @@ public class BankTeller {
 	
 	public void run() {
 		//Runs the Bank Teller
+		System.out.println("Bank Teller is running.\n");
 		this.isRunning = !this.isRunning; 
 		while(isRunning) {
 			captureInput(scanInput);
@@ -47,10 +48,8 @@ public class BankTeller {
 			String input = sc.nextLine();
 			if(input.equals("")) {return;}
 			String[] tokens = input.split("\\s+");
-			String accountType = null;
+			String accountType = null, code = null, amount = null;
 			Profile profile = null;
-			String amount = null;
-			String code = null; 
 			int intendingCommand = -1;
 			if(tokens.length < 0) {
 				break;
@@ -167,9 +166,8 @@ public class BankTeller {
 				this.mainDatabase.printFeeAndInterest();
 				return 0;
 			case 8:
-				this.mainDatabase.doUBCommand();
+				this.mainDatabase.updateDatabase();
 				return 0;
-				//UB command
 			case 9:
 				this.endBankTeller();
 				return 0;
@@ -379,7 +377,7 @@ public class BankTeller {
 				return null;
 			}
 			if(this.mainDatabase.getAccount(newAcc).isClosed()) {
-				this.mainDatabase.reopen(newAcc,bal,false);
+				this.mainDatabase.reopen(newAcc);
 				System.out.println("Account reopened.");
 				return null;
 			}
@@ -424,7 +422,7 @@ public class BankTeller {
 				return null;
 			}
 			if(acct.isClosed()) {
-				this.mainDatabase.reopen(newAcc,bal,false);
+				this.mainDatabase.reopen(newAcc);
 				System.out.println("Account reopened.");
 				return null;
 			}
@@ -463,7 +461,7 @@ public class BankTeller {
 			return newAcc;
 		}else {
 			if(this.mainDatabase.getAccount(newAcc).isClosed()) {
-				this.mainDatabase.reopen(newAcc,bal,newAcc.isLoyalCustomer());
+				this.mainDatabase.reopen(newAcc);
 				System.out.println("Account reopened.");
 				return null;
 			}
@@ -494,7 +492,7 @@ public class BankTeller {
 			return newAcc;
 		}else {
 			if(this.mainDatabase.getAccount(newAcc).isClosed()) {
-				this.mainDatabase.reopen(newAcc,bal,newAcc.isLoyalCustomer());
+				this.mainDatabase.reopen(newAcc);
 				System.out.println("Account reopened.");
 				return null;
 			}
@@ -509,7 +507,6 @@ public class BankTeller {
 	
 	public static void main(String[] args) {
 		new BankTeller().run();
-
 	}
 
 }

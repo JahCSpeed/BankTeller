@@ -1,5 +1,7 @@
 package accounts;
 
+import java.text.DecimalFormat;
+
 import accountType.Checking;
 import accountType.CollegeChecking;
 import accountType.MoneyMarket;
@@ -104,16 +106,16 @@ public class AccountDatabase {
 		this.accounts[index].balance = 0;
 		return (this.accounts[index].closed = true);
 	}
-	public boolean reopen(Account account, double amount, boolean loyal) {
+	public boolean reopen(Account account) {
 		
 		int index = this.find(account);
 		if(index == -1) {
 			return false;
 		}
 		this.accounts[index].closed = false;
-		this.accounts[index].balance = amount;
-		if(account instanceof Savings) {
-			((Savings)this.accounts[index]).setLoyalCustomer(loyal);
+		this.accounts[index].balance = account.getBalance();
+		if(account instanceof Savings || account instanceof MoneyMarket) {
+			((Savings)this.accounts[index]).setLoyalCustomer(((Savings)account).isLoyalCustomer());
 		}
 		return true;
 	}
@@ -203,13 +205,31 @@ public class AccountDatabase {
 			System.out.println("Account Database is empty!");
 			return;
 		}
-		
+		System.out.println("\n*list of accounts with fee and monthly interest");
+		DecimalFormat numberFormat = new DecimalFormat("#,##0.00");
+		double fee;
+		double montlyInterst;
+		for(int i = 0; i < this.numAcct; i++) {
+			fee = this.accounts[i].fee();
+			montlyInterst = ( (this.accounts[i].getBalance() * (this.accounts[i].monthlyInterest())));
+			System.out.println(this.accounts[i].toString() + "::fee $" + numberFormat.format(fee) + "::monthly interest $" + numberFormat.format(montlyInterst));
+		}
 	}
 	
-	public void doUBCommand() {
+	public void updateDatabase() {
 		if(this.numAcct == 0) {
 			System.out.println("Account Database is empty!");
 			return;
+		}
+		System.out.println("\n*list of accounts with updated balance");
+		double fee;
+		double montlyInterst;
+		for(int i = 0; i < this.numAcct; i++) {
+			fee = this.accounts[i].fee();
+			montlyInterst = ( (this.accounts[i].getBalance() * (this.accounts[i].monthlyInterest())));
+			this.accounts[i].balance+=montlyInterst;
+			this.accounts[i].balance-=fee;
+			System.out.println(this.accounts[i].toString());
 		}
 	}
 }

@@ -11,7 +11,7 @@ public class MoneyMarket extends Savings {
 	
 	@Override
 	public double monthlyInterest() {
-		return (this.isLoyalCustomer()?0.0095:0.008);
+		return (this.isLoyalCustomer()?0.0095:0.008) / 12;
 	}
 
 	@Override
@@ -25,13 +25,14 @@ public class MoneyMarket extends Savings {
 
 	@Override
 	public String getType() {
-		return "Money Market";
+		return "Money Market Savings";
 	}
 	
 	@Override
 	public void withdraw(double amount) {
 		super.withdraw(amount);
 		this.withdrawCounter++;
+		this.checkLoyalty();
 	}
 	
 	public void checkLoyalty() {

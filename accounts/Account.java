@@ -2,9 +2,6 @@ package accounts;
 
 import java.text.DecimalFormat;
 
-import accountType.Checking;
-import accountType.CollegeChecking;
-
 public abstract class Account {
 	protected Profile holder;
 	protected boolean closed;
@@ -30,8 +27,8 @@ public abstract class Account {
 	
 	/**
 	 Turns this account into a readable string.
-	 Format: "Type :: Holder :: $Balance"
-	 @return This account tyoe in a readable string format.
+	 Format: "Type :: Holder :: $Balance" :: "" or "CLOSED"
+	 @return This account type in a readable string format.
 	 */
 	@Override
 	public String toString() { 

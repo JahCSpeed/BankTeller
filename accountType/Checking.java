@@ -11,7 +11,7 @@ public class Checking extends Account{
 	}
 
 	public double monthlyInterest() {
-		return 0.001;
+		return 0.001 / 12;
 	}
 
 	public double fee() {

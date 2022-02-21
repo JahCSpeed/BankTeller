@@ -16,7 +16,7 @@ public class CollegeChecking extends Checking{
 		return 0;
 	}
 	public double monthlyInterest() {
-		return 0.0025;
+		return 0.0025 / 12;
 	}
 	
 	/**

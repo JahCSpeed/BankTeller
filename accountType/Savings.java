@@ -16,7 +16,7 @@ public class Savings extends Account {
 	
 	@Override
 	public double monthlyInterest() {
-		return (this.loyalCustomer?0.0045:0.003);
+		return (this.loyalCustomer?0.0045:0.003) / 12;
 	}
 
 	@Override
