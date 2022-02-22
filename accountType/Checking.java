@@ -3,6 +3,10 @@ package accountType;
 import accounts.Account;
 import accounts.Profile;
 
+/**
+ 
+ @author Jah C. Speed, Abe Vitangcol
+ */
 public class Checking extends Account{
 	public Checking(Profile holder,double balance) {
 		this.holder = holder;

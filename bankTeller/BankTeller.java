@@ -29,6 +29,10 @@ public class BankTeller {
 		this.mainDatabase = new AccountDatabase();
 	}
 	
+	/**
+	 Runs the Bank Teller to continuously allow inputs until it has been stopped.
+	 Takes batch commands or single commands.
+	 */
 	public void run() {
 		//Runs the Bank Teller
 		System.out.println("Bank Teller is running.\n");
@@ -77,8 +81,12 @@ public class BankTeller {
 	/**
 	 Performs a command that requires additional params to execute.
 	 Deals with Opening, Closing, Depositing, and Withdrawing from accounts.
-	 @param command
-	        (more params)
+	 @param intendingCommand The command to be done after obtaining the id number
+	        accountType The type of account to be used (for deposit, withdrawal, opening or closing)
+	        profile The identifications of a person (fname, lname, dob).
+	        amount The amount to withdraw or deposit in the account.
+	        code The campus code for a college account, if applicable.
+	        paramSize The amount of parameters a given line has.
 	 */
 	private void doCommand(int intendingCommand, String accountType, Profile profile, String amount, String code, int paramSize) {
 		Account tempAccount;
@@ -135,7 +143,7 @@ public class BankTeller {
 			
 		default:
 			break;
-	}
+		}
 		
 	}
 
@@ -210,7 +218,16 @@ public class BankTeller {
 		return -1;
 	}
 	
-	
+	/**
+	 Attempts to open an account based on the params given.
+	 @param accountType
+	        profile The identifications of a person (fname, lname, dob)
+	 	    balance The amount to deposit into the new account.
+	 		code The campus code for a college checking account, if applicable and necessary.
+	 		paramSize The amount of parameters in the given line.
+	 @return The account created based on the accountType given if there are no problems.
+	 		 null otherwise (a problem was encountered in making the account)
+	 */
 	private Account openAccountCommand(String accountType, Profile profile, String balance, String code, int paramSize) {
 		switch(accountType) {
 			case "C":
@@ -243,6 +260,14 @@ public class BankTeller {
 		}
 		
 	}
+	
+	/**
+	 
+	 @param accountType The type of account to be closed.
+	        profile The identifications of a person using the account (fname, lname, dob)
+	 	 	paramSize The amount of parameters of the given line.
+	 @return The account that was closed, null otherwise.
+	 */
 	private Account closeAccountCommand(String accountType, Profile profile, int paramSize) {
 		if(paramSize != 5) {
 			System.out.println("Missing data for closing an account.");
@@ -354,6 +379,14 @@ public class BankTeller {
 		return acct;
 	}
 	
+	/**
+	 Opens a checking account given a starting balance and a profile of the person using it.
+	 @param profile The identifications of a person (fname, lname, dob)
+	 	 	balance The starting amount of money to open the account.
+	 @return null if an invalid deposit was made, a duplicate account is in the database, 
+	 		      or the account was reopened.
+	 		 The newly created account, newAcc, otherwise.
+	 */
 	private Account checkingAccount(Profile profile, String balance) {
 		double bal;
 		try {
@@ -504,7 +537,10 @@ public class BankTeller {
 	
 	
 	
-	
+	/**
+	 The main method to run the BankTeller.
+	 @param args any arguments used along with the call for BankTeller. Unused.
+	 */
 	public static void main(String[] args) {
 		new BankTeller().run();
 	}

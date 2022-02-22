@@ -1,6 +1,10 @@
 package accounts;
 import date.Date;
 
+/**
+ 
+ @author Jah C. Speed, Abe Vitangcol
+ */
 public class Profile {
 	private String fname;
 	private String lname;

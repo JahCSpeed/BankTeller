@@ -2,6 +2,10 @@ package accounts;
 
 import java.text.DecimalFormat;
 
+/**
+ 
+ @author Jah C. Speed, Abe Vitangcol
+ */
 public abstract class Account {
 	protected Profile holder;
 	protected boolean closed;

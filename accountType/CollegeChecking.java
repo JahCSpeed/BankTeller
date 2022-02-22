@@ -2,6 +2,10 @@ package accountType;
 
 import accounts.Profile;
 
+/**
+ 
+ @author Jah C. Speed, Abe Vitangcol
+ */
 public class CollegeChecking extends Checking{
 	private int campusCode;
 	

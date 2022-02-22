@@ -3,6 +3,10 @@ package accountType;
 import accounts.Account;
 import accounts.Profile;
 
+/**
+ 
+ @author Jah C. Speed, Abe Vitangcol
+ */
 public class Savings extends Account {
 	
 	private boolean loyalCustomer;

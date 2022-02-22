@@ -2,6 +2,10 @@ package accountType;
 
 import accounts.Profile;
 
+/**
+ 
+ @author Jah C. Speed, Abe Vitangcol
+ */
 public class MoneyMarket extends Savings {
 	private int withdrawCounter;
 	
