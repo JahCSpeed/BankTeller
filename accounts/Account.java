@@ -32,8 +32,8 @@ public abstract class Account {
 	 */
 	@Override
 	public String toString() { 
-		DecimalFormat numberFormat = new DecimalFormat("#,##0.00");
-		return getType() + "::" + holder.toString() + "::Balance $" + numberFormat.format(getBalance()) + (!this.closed? "":"::CLOSED");
+
+		return getType() + "::" + holder.toString() + "::Balance $" + new DecimalFormat("#,##0.00").format(getBalance()) + (!this.closed? "":"::CLOSED");
 	}
 	
 	/**
