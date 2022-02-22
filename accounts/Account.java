@@ -36,6 +36,10 @@ public abstract class Account {
 		return getType() + "::" + holder.toString() + "::Balance $" + numberFormat.format(getBalance()) + (!this.closed? "":"::CLOSED");
 	}
 	
+	/**
+	 * Remove the amount from the balance. Will not work if amount is < 0 or > balance.
+	 * @param amount The amount the user wants to withdraw.
+	 */
 	public void withdraw(double amount) {
 		if(amount < 0 || amount > this.balance) {
 			return;
@@ -43,7 +47,10 @@ public abstract class Account {
 		this.balance-= amount;
 		
 	}
-	
+	/**
+	 * Deposit amount into the balance. Will not work if amount < 0.
+	 * @param amount The amount the user wants to deposit.
+	 */
 	public void deposit(double amount) { 
 		if(amount < 0) {
 			return;
@@ -65,12 +72,26 @@ public abstract class Account {
 	public Profile getHolder() {
 		return this.holder;
 	}
-	
+	/**
+	 * Gets the Closed value of the account.
+	 * @return If the account is closed or not, false = open, true = closed.
+	 */
 	public boolean isClosed() {
 		return this.closed;
 	}
-	
+	/**
+	 * Get monthly interest for the account.
+	 * @return monthly interest as a double
+	 */
 	public abstract double monthlyInterest(); //return the monthly interest
+	/**
+	 * Get fee for the account.
+	 * @return fee as a double.
+	 */
 	public abstract double fee(); //return the monthly fee
+	/**
+	 * Get what type of account the obj is.
+	 * @return account type as a string.
+	 */
 	public abstract String getType(); //return the account type (class name)
 }

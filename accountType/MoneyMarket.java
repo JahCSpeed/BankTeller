@@ -25,7 +25,7 @@ public class MoneyMarket extends Savings {
 
 	@Override
 	public String getType() {
-		return "Money Market Savings";
+		return "Money Market" + super.toString();
 	}
 	
 	@Override
