@@ -8,7 +8,7 @@ import accounts.Profile;
  */
 public class CollegeChecking extends Checking{
 	private int campusCode;
-	
+	private static final double ANNUAL_INTEREST_RATE = 0.0025;
 	public CollegeChecking(Profile holder,double balance, int campusCode) {
 		super(holder, balance);
 		this.campusCode = campusCode;
@@ -20,7 +20,7 @@ public class CollegeChecking extends Checking{
 		return 0;
 	}
 	public double monthlyInterest() {
-		return 0.0025 / 12;
+		return ANNUAL_INTEREST_RATE / 12;
 	}
 	
 	/**

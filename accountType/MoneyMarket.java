@@ -8,19 +8,22 @@ import accounts.Profile;
  */
 public class MoneyMarket extends Savings {
 	private int withdrawCounter;
-	
+	private static final double BALANCE_THRESHOLD = 2500;
+	private static final double ANNUAL_INTEREST_RATE = 0.008;
+	private static final double LOYAL_ANNUAL_INTEREST_RATE = 0.0095;
+	private static final int MAX_WITHDRAW_AMOUNT = 2;
 	public MoneyMarket(Profile holder,double balance) {
 		super(holder,balance, true);
 	}
 	
 	@Override
 	public double monthlyInterest() {
-		return (this.isLoyalCustomer()?0.0095:0.008) / 12;
+		return (this.isLoyalCustomer()?LOYAL_ANNUAL_INTEREST_RATE:ANNUAL_INTEREST_RATE) / 12;
 	}
 
 	@Override
 	public double fee() {
-		if(this.balance >= 2500 && !(this.withdrawCounter >= 2)) {
+		if(this.balance >= BALANCE_THRESHOLD && !(this.withdrawCounter >= MAX_WITHDRAW_AMOUNT)) {
 			return 0;
 		}else {
 			return 10;

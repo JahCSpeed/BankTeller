@@ -26,6 +26,9 @@ public class DateTest {
 		
 		boolean good_date1 = new Date("2/10/2015").isValid();
 		assertTrue(good_date1);
+	
+		boolean todays_date = new Date().isValid();
+		assertTrue(todays_date);
 		
 	}
 		

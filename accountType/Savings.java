@@ -10,7 +10,9 @@ import accounts.Profile;
 public class Savings extends Account {
 	
 	private boolean loyalCustomer;
-	
+	private static final double BALANCE_THRESHOLD = 300;
+	private static final double ANNUAL_INTEREST_RATE = 0.003;
+	private static final double LOYAL_ANNUAL_INTEREST_RATE = 0.0045;
 	public Savings(Profile holder,double balance,boolean loyalCustomer) {
 		this.holder = holder;
 		this.closed = false;
@@ -20,12 +22,12 @@ public class Savings extends Account {
 	
 	@Override
 	public double monthlyInterest() {
-		return (this.loyalCustomer?0.0045:0.003) / 12;
+		return (this.loyalCustomer?LOYAL_ANNUAL_INTEREST_RATE:ANNUAL_INTEREST_RATE) / 12;
 	}
 
 	@Override
 	public double fee() {
-		if(this.balance >= 300) {
+		if(this.balance >= BALANCE_THRESHOLD) {
 			return 0;
 		}else {
 			return 6;
