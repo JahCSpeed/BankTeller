@@ -3,7 +3,9 @@ package accounts;
 import java.text.DecimalFormat;
 
 /**
- 
+ The Account class is an abstract class, which acts as a framework for the Savings and Checking classes.
+ It is able to check if two accounts are the same or not as well as provide methods to print out
+ the extending classes. It also deals with depositing or withdrawing money from the said accounts.
  @author Jah C. Speed, Abe Vitangcol
  */
 public abstract class Account {
@@ -41,8 +43,8 @@ public abstract class Account {
 	}
 	
 	/**
-	 * Remove the amount from the balance. Will not work if amount is < 0 or > balance.
-	 * @param amount The amount the user wants to withdraw.
+	 Remove the amount from the balance. Will not work if amount is < 0 or > balance.
+	 @param amount The amount the user wants to withdraw.
 	 */
 	public void withdraw(double amount) {
 		if(amount < 0 || amount > this.balance) {
@@ -52,8 +54,8 @@ public abstract class Account {
 		
 	}
 	/**
-	 * Deposit amount into the balance. Will not work if amount < 0.
-	 * @param amount The amount the user wants to deposit.
+	 Deposit amount into the balance. Will not work if amount < 0.
+	 @param amount The amount the user wants to deposit.
 	 */
 	public void deposit(double amount) { 
 		if(amount < 0) {
@@ -77,25 +79,25 @@ public abstract class Account {
 		return this.holder;
 	}
 	/**
-	 * Gets the Closed value of the account.
-	 * @return If the account is closed or not, false = open, true = closed.
+	 Gets the Closed value of the account.
+	 @return If the account is closed or not, false = open, true = closed.
 	 */
 	public boolean isClosed() {
 		return this.closed;
 	}
 	/**
-	 * Get monthly interest for the account.
-	 * @return monthly interest as a double
+	 Get monthly interest for the account.
+	 @return monthly interest as a double
 	 */
 	public abstract double monthlyInterest(); //return the monthly interest
 	/**
-	 * Get fee for the account.
-	 * @return fee as a double.
+	 Get fee for the account.
+	 @return fee as a double.
 	 */
 	public abstract double fee(); //return the monthly fee
 	/**
-	 * Get what type of account the obj is.
-	 * @return account type as a string.
+	 Get what type of account the obj is.
+	 @return account type as a string.
 	 */
 	public abstract String getType(); //return the account type (class name)
 }
