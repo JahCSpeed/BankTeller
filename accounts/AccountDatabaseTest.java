@@ -9,6 +9,12 @@ import date.Date;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+
+/**
+ The AccountDatabaseTest is a JUnit4 test specifically for the AccountDatabase class.
+ Assesses whether opening or closing the accounts are properly working as intended.
+ @author Jah C. Speed, Abe Vitangcol
+ */
 public class AccountDatabaseTest {
 	public AccountDatabase database = new AccountDatabase();
 	public Profile testProfile = new Profile("Jah", "Caffie-Speed", new Date("5/6/2001"));

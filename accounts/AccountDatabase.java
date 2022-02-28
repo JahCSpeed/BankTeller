@@ -7,16 +7,26 @@ import accountType.CollegeChecking;
 import accountType.MoneyMarket;
 import accountType.Savings;
 
+/**
+ The AccountDatabase class manages the array of accounts in the system.
+ It is responsible for returning account information, checking for duplicates, and various
+ account actions such as opening, closing, depositing, and withdrawing. It is also capable of
+ printing out its contents and growing when it runs out of space.
+ @author Jah C. Speed, Abe Vitangcol
+ */
 public class AccountDatabase {
 	private Account [] accounts;
 	private int numAcct;
 	private final int INCREASESIZE = 4;
 	
-	
+	/**
+	 Constructs the Account Database with an empty array and no accounts in it.
+	 */
 	public AccountDatabase() {
 		this.numAcct = 0;
 		this.accounts = new Account[numAcct];
 	}
+	
 	/**
 	 Finds a specific account in this array of accounts and returns the index.
 	 @param account The specific account to be found.
@@ -30,6 +40,13 @@ public class AccountDatabase {
 		}
 		return -1;
 	}
+	
+	/**
+	 Finds the specific account in this array of accounts and returns the index.
+	 Can be used for purposes outside of this class.
+	 @param account The specific account to be found.
+	 @return The index of the account found, null otherwise.
+	 */
 	public Account getAccount(Account account) { //return the index, or NOT_FOUND
 		for(int i = 0; i < this.numAcct; i++) {
 			//System.out.println("Person 1: " + this.accounts[i].toString() + " \tPerson 2: " + account.toString());
@@ -41,6 +58,11 @@ public class AccountDatabase {
 		return null;
 	}
 	
+	/**
+	 Checks if the current database has a duplicate of the account of interest.
+	 @param account The account of interest to see if there is a duplicate or not.
+	 @return The index "i" of where the duplicate is located in the array, -1 otherwise.
+	 */
 	public int checkDupChecking(Account account) {
 		for(int i = 0; i < this.numAcct; i++) {
 			if(this.accounts[i].equals(account)) {
@@ -52,14 +74,12 @@ public class AccountDatabase {
 				}
 				if(this.accounts[i] instanceof CollegeChecking && account instanceof Checking) {
 					return i;
-				}
-				
-			}
-			
-			
+				}	
+			}	
 		}
 		return -1;
 	}
+	
 	/**
 	 Grows the capacity of the accounts array by 4.
 	 Helpful especially when the old array is out of space.
@@ -74,7 +94,7 @@ public class AccountDatabase {
 	/**
 	 Adds an account into the array if there is room, and grows the array if there is no room.
 	 @param account The specific account to be added to this array.
-	 @return true if this operation was successful.
+	 @return true if this operation was successful, false otherwise
 	 */
 	public boolean open(Account account) {
 		if(this.numAcct == this.accounts.length) {
@@ -90,7 +110,7 @@ public class AccountDatabase {
 	/**
 	 Closes a specific account, making it unable to be used.
 	 @param account The specific account to be closed.
-	 @return True if this action was successful.
+	 @return True if this action was successful, false otherwise.
 	 */
 	public boolean close(Account account) {
 		int index = this.find(account);
@@ -106,6 +126,12 @@ public class AccountDatabase {
 		this.accounts[index].balance = 0;
 		return (this.accounts[index].closed = true);
 	}
+	
+	/**
+	 Reopens a specific account, making able to be used again.
+	 @param account The specific account to be reopened
+	 @return True if this action was successful, false otherwise.
+	 */
 	public boolean reopen(Account account) {
 		
 		int index = this.find(account);
@@ -120,6 +146,10 @@ public class AccountDatabase {
 		return true;
 	}
 	
+	/**
+	 Finds the account to deposit into and deposits into it, if open.
+	 @param account The account to deposit into.
+	 */
 	public void deposit(Account account) { 
 		int index = this.find(account);
 		if(index == -1) {
@@ -131,6 +161,11 @@ public class AccountDatabase {
 		this.accounts[index].deposit(account.balance);
 	}
 	
+	/**
+	 Finds the account to withdraw from and take out money from it, if able to.
+	 @param account The account to withdraw from.
+	 @return False if the account was not found, is closed, or has insufficient balance, true otherwise.
+	 */
 	//return false if insufficient fund
 	public boolean withdraw(Account account) {
 		int index = this.find(account);
@@ -200,6 +235,9 @@ public class AccountDatabase {
 		
 	}
 	
+	/**
+	 Prints the accounts and shows the fees and monthly interest of each account.
+	 */
 	public void printFeeAndInterest() { 
 		if(this.numAcct == 0) {
 			System.out.println("Account Database is empty!");
@@ -216,6 +254,9 @@ public class AccountDatabase {
 		}
 	}
 	
+	/**
+	 Updates the balance of each account and prints out the account's updated information.
+	 */
 	public void updateDatabase() {
 		if(this.numAcct == 0) {
 			System.out.println("Account Database is empty!");

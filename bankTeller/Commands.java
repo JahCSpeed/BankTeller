@@ -4,7 +4,7 @@ package bankTeller;
  The commands class holds all the valid command information for the BankTeller to use.
  It lists all the valid commands as ids for use in the BankTeller, where further
  actions will be done depending on the command.
- @author Abe Vitangcol
+ @author Abe Vitangcol, Jah C. Speed
  */
 public enum Commands {
 	O(1),

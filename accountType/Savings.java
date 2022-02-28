@@ -81,6 +81,7 @@ public class Savings extends Account {
 	/**
 	 Uses the Account method to make this account into a readable string.
 	 @return The account type in the form of "Type::Holder::Balance $####.00::(CLOSED if closed)"
+	 		 along with whether this account is loyal or not.
 	 */
 	public String toString() {
 		return super.toString() + (this.isLoyalCustomer()? "::Loyal":"");

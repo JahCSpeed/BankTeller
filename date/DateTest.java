@@ -3,6 +3,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
+/**
+ The DateTest class is a JUnit4 test for specifically the Date class.
+ Assesses whether the isValid function is working as intended or not.
+ @author Jah C. Speed, Abe Vitangcol
+ */
 public class DateTest {
 	@Test
 	public void isValid() {

@@ -12,7 +12,9 @@ import accounts.Profile;
 import date.Date;
 
 /**
- 
+ The BankTeller class is the user interface class to take in inputs and output the results.
+ Wherever there are invalid or errors in the inputs, it is capable of displaying an error
+ message and state the error. Also able to do various exception handling.
  @author Jah C Speed, Abe Vitangcol
  */
 public class BankTeller {
@@ -42,6 +44,7 @@ public class BankTeller {
 		}
 		scanInput.close();
 	}
+	
 	/**
 	 Scans the user input(s) and does command(s) based on the inputs given.
 	 Able to capture single or multiple lines of input.
@@ -78,6 +81,7 @@ public class BankTeller {
 			break;
 			}
 	}
+	
 	/**
 	 Performs a command that requires additional params to execute.
 	 Deals with Opening, Closing, Depositing, and Withdrawing from accounts.
@@ -224,7 +228,7 @@ public class BankTeller {
 	        profile The identifications of a person (fname, lname, dob)
 	 	    balance The amount to deposit into the new account.
 	 		code The campus code for a college checking account, if applicable and necessary.
-	 		paramSize The amount of parameters in the given line.
+	 		paramSize The number of parameters in the given line.
 	 @return The account created based on the accountType given if there are no problems.
 	 		 null otherwise (a problem was encountered in making the account)
 	 */
@@ -262,10 +266,10 @@ public class BankTeller {
 	}
 	
 	/**
-	 
+	 Attempts to close an account based on the type to be closed and the person holding the account.
 	 @param accountType The type of account to be closed.
 	        profile The identifications of a person using the account (fname, lname, dob)
-	 	 	paramSize The amount of parameters of the given line.
+	 	 	paramSize The number of parameters of the given line.
 	 @return The account that was closed, null otherwise.
 	 */
 	private Account closeAccountCommand(String accountType, Profile profile, int paramSize) {
@@ -287,6 +291,16 @@ public class BankTeller {
 				
 		}
 	}
+	
+	/**
+	 Tries to deposit an amount for a specific account with a specific profile and type of account used.
+	 @param accountType The type of account to deposit into (savings, checking, etc.)
+	        profile The identifications of a person using the account (fname, lname, dob)
+	        balance The amount to deposit into the account.
+	        paramSize The number of parameters of the given line.
+	 @return null if the balance was invalid or missing in the command or if the account type was invalid.
+	 		 The new account created to find and deposit into otherwise.
+	 */
 	private Account depositCommand(String accountType, Profile profile, String balance,int paramSize) {
 		if(paramSize != 6) {
 			System.out.println("Missing data for depositing into account.");
@@ -322,6 +336,16 @@ public class BankTeller {
 		}
 		return tempAccount;	
 	}
+	
+	/**
+	 Tries to withdraw money from a specific account with a specific profile and account type.
+	 @param accountType The type of account to be withdrawn from (savings, checking, etc.)
+	        profile The identifications of the person using the account (fname, lname, dob)
+	        balance The amount of money to withdraw from the account.
+	        paramSize The number of parameters in the given line.
+	 @return null if the balance was invalid or missing in the command or if the account type was invalid.
+	 		 The new account created to find and withdraw from otherwise.
+	 */
 	private Account withdrawCommand(String accountType, Profile profile, String balance,int paramSize) {
 		if(paramSize != 6) {
 			System.out.println("Missing data for withdraing from account.");
@@ -358,6 +382,12 @@ public class BankTeller {
 		return tempAccount;	
 	}
 	
+	/**
+	 Closes a checking account given a profile.
+	 @param profile The identifications of the person using the account (fname, lname, dob)
+	 @return null if the account was not found in the database
+	 		 The newly created account to find and close otherwise.
+	 */
 	private Account closeCheckingAccount(Profile profile) {
 		Checking acct = (Checking)(this.mainDatabase.getAccount(new Checking(profile,-1)));
 		if(this.mainDatabase.getAccount(acct) == null) {
@@ -366,14 +396,35 @@ public class BankTeller {
 		}
 		return acct;
 	}
+	
+	/**
+	 Closes a college checking account given a profile.
+	 @param profile The identifications of the person using the account (fname, lname, dob)
+	 @return null if the account was not found in the database
+	 		 The newly created account to find and close otherwise.
+	 */
 	private Account closeCollegeCheckingAccount(Profile profile) {
 		CollegeChecking acct = (CollegeChecking)(this.mainDatabase.getAccount(new CollegeChecking(profile,-1,-1)));
 		return acct;
 	}
+	
+	/**
+	 Closes a money market account given a profile.
+	 @param profile The identifications of the person using the account (fname, lname, dob)
+	 @return null if the account was not found in the database
+	 		 The newly created account to find and close otherwise.
+	 */
 	private Account closeMoneyMarketAccount(Profile profile) {
 		MoneyMarket acct = (MoneyMarket)(this.mainDatabase.getAccount(new MoneyMarket(profile,-1)));
 		return acct;
 	}
+	
+	/**
+	 Closes a savings account given a profile.
+	 @param profile The identifications of the person using the account (fname, lname, dob)
+	 @return null if the account was not found in the database
+	 		 The newly created account to find and close otherwise.
+	 */
 	private Account closeSavingsAccount(Profile profile) {
 		Savings acct = (Savings)(this.mainDatabase.getAccount(new Savings(profile,-1,false)));
 		return acct;
@@ -417,10 +468,18 @@ public class BankTeller {
 			return null;
 			
 		}
-
-		
-		
+	
 	}
+
+	/**
+	 Opens a college checking account given a profile, starting balance, and a campus code.
+	 @param profile The identifications of a person using the account (fname, lname, dob)
+	        balance The starting amount of money to open the account.
+	        code The campus code required to open the account. Cannot open the account with a wrong code.
+	 @return null if an invalid deposit was made, an invalid campus code was inputed,
+	 		 a duplicate account was found in the database, or the account was reopened.
+	 		 The newly created account, newAcc, otherwise.
+	 */
 	private Account collageCheckingAccount(Profile profile, String balance, String code) {
 		double bal;
 		int cd;
@@ -462,10 +521,17 @@ public class BankTeller {
 			System.out.println(profile.toString() + " same account(type) is in the database.");
 			return null;
 		}
-		
-		
-		
 	}
+	
+	/**
+	 Opens a savings account given a profile, starting balance, and loyalty code.
+	 @param profile The identifications of a person using the account (fname, lname, dob)
+	        balance The starting amount of money to put into the account.
+	        code A number that is either 0 or 1. States if the holder is loyal or not.
+	 @return null if an invalid deposit was made, an invalid loyalty code was inputed,
+	 		 a duplicate account was found in the database, or the account was reopened.
+	 		 The newly created account, newAcc, otherwise.
+	 */
 	private Account savingsAccount(Profile profile, String balance, String code) {
 		double bal;
 		int cd;
@@ -501,8 +567,16 @@ public class BankTeller {
 			System.out.println(profile.toString() + " same account(type) is in the database.");
 			return null;
 		}		
-		
 	}
+	
+	/**
+	 Opens a money market account given a profile and a starting balance.
+	 @param profile The identifications of a person using the account (fname, lname, dob)
+	        balance The starting amount of money to put into the account.
+	 @return null if an invalid deposit was made, the balance was not at least $2500 to open,
+	 		 a duplicate account was found in the database, or the account was reopened.
+	 		 The newly created account, newAcc, otherwise.
+	 */
 	private Account moneyMarketAccount(Profile profile, String balance) {
 		double bal;
 		try {

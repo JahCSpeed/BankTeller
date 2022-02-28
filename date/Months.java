@@ -1,9 +1,10 @@
 package date;
+
 /**
  The Months class to store information about the months of the year.
  An enum class that gives each month an id to identify a month as well as the
  days in it on both leap and non-leap years.
- @author Jah C. Speed,
+ @author Jah C. Speed, Abe Vitangcol
  */
 public enum Months {
 	January(0,31,31),
@@ -22,6 +23,7 @@ public enum Months {
 	public final int id;
 	public final int days;
 	public final int leapYearDays;
+	
 /**
  Constructor for the months, giving the months the days it has on both leap and non-leap years
  as well as the id to identify it.	

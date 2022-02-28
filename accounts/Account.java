@@ -53,6 +53,7 @@ public abstract class Account {
 		this.balance-= amount;
 		
 	}
+	
 	/**
 	 Deposit amount into the balance. Will not work if amount < 0.
 	 @param amount The amount the user wants to deposit.
@@ -71,32 +72,36 @@ public abstract class Account {
 	public double getBalance() {
 		return this.balance;
 	}
+	
 	/**
 	 Gets the Holder of this account.
-	 @return The holder of this account in a Profile format.
+	 @return The holder of this account.
 	 */
 	public Profile getHolder() {
 		return this.holder;
 	}
+	
 	/**
-	 Gets the Closed value of the account.
+	 Gets the Closed value of the account. Used in children classes.
 	 @return If the account is closed or not, false = open, true = closed.
 	 */
 	public boolean isClosed() {
 		return this.closed;
 	}
 	/**
-	 Get monthly interest for the account.
+	 Get monthly interest for the account. Used in children classes.
 	 @return monthly interest as a double
 	 */
 	public abstract double monthlyInterest(); //return the monthly interest
+	
 	/**
-	 Get fee for the account.
+	 Get fee for the account. Used in children classes.
 	 @return fee as a double.
 	 */
 	public abstract double fee(); //return the monthly fee
+	
 	/**
-	 Get what type of account the obj is.
+	 Get what type of account the object is. Used in children classes.
 	 @return account type as a string.
 	 */
 	public abstract String getType(); //return the account type (class name)
